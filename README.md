@@ -153,18 +153,18 @@ Theme model
 
 | HTTP Method | URL | Request Body | Success status | Error Status | Description |
 | - | - | - | - | - | - |
-| GET | /auth/me | | 201 | 404 | get my user from session |
-| POST | /auth/signup | {name, email, password} | 201 | 404 | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-| POST | /auth/login | {username, password} | 200 | 401 | Checks if fields not empty (422), if user exists (404), and if password challenges (404), then stores user in session |
-| POST | /auth/logout | | 204 | 400 | Logs out the user |
-| GET | /map | {maps} | 200 | 404 | recibo todos los maps |
+| GET | /auth/me | | 201 | 404 | recibe la session del usuario |
+| POST | /auth/signup | {name, email, password} | 201 | 404 | guardamos los datos del usuario |
+| POST | /auth/login | {username, password} | 200 | 401 | Mira si los campos no estan vacios (422), si el usuario existe (404), i si existe la contrasenya (404), entonces inicia session |
+| POST | /auth/logout | | 204 | 400 | cierra la session del usuario|
+| GET | /map | {maps} | 200 | 404 | recibe todos los maps |
 | DELETE | /map/:idMap/delete | {idMap} | 200 | 400 | borro el map |
-| GET | /map/:idMAp | {idMap} | | | recibo un mapa |
-| PUT | /map/:idMap/edit | {idMap} | | | editamos el mapa |
-| GET | /story/:idStory | {idStory} | | | recibo una historia |
-| PUT | /story/:idStory/edit | {idStory} | | | editamos la historia |
-| POST | /story/addstory | {newStory} | | 400 | añado una historia nueva |
-| DELETE | /map/:idStory/delete | {idStory} | 200 | 400 | borro la historia |
+| GET | /map/:idMAp | {idMap} | | | recibe un mapa |
+| PUT | /map/:idMap/edit | {idMap} | | | edita el mapa |
+| GET | /story/:idStory | {idStory} | | | recibe una historia |
+| PUT | /story/:idStory/edit | {idStory} | | | edita la historia |
+| POST | /story/addstory | {newStory} | | 400 | añade una historia nueva |
+| DELETE | /map/:idStory/delete | {idStory} | 200 | 400 | borra la historia |
 
 <br>
 
