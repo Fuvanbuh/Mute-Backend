@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  map: [{ type: Schema.Types.ObjectId, ref: "Map" }]
+  travelMap: []
 }, {
   timestamps: {
     createdAt: 'created_at',

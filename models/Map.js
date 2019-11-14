@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const mapSchema = new Schema({
-  completePath: Number,
-  story: [{ type: Schema.Types.ObjectId, ref: "Story" }]
+  completePath: { type: Number, default: 1 },
+  story: [{ type: Schema.Types.ObjectId, ref: "Story" }],
+  userId: String
 }, {
   timestamps: {
     createdAt: 'created_at',
