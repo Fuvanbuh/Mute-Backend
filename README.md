@@ -161,10 +161,10 @@ Theme model
 | DELETE | /map/:idMap/delete | {idMap} | 200 | 400 | borro el map |
 | GET | /map/:idMAp | {idMap} | | | recibe un mapa |
 | PUT | /map/:idMap/edit | {idMap} | | | edita el mapa |
+| DELETE | /map/:idStory/delete | {idStory} | 200 | 400 | borra la historia |
 | GET | /story/:idStory | {idStory} | | | recibe una historia |
 | PUT | /story/:idStory/edit | {idStory} | | | edita la historia |
 | POST | /story/addstory | {newStory} | | 400 | añade una historia nueva |
-| DELETE | /map/:idStory/delete | {idStory} | 200 | 400 | borra la historia |
 
 <br>
 
