@@ -12,6 +12,6 @@ const themeSchema = new Schema({
   },
 });
 
-const Theme = mongoose.model('User', themeSchema);
+const Theme = mongoose.model('Theme', themeSchema);
 
 module.exports = Theme;
