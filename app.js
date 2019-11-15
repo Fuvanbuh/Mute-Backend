@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require('cors');
 
 const express = require('express');
 const path = require('path');
@@ -17,6 +18,14 @@ const storyRouter = require('./routes/story')
 
 //express server instance
 const app = express();
+
+// CORS MIDDLEWARE SETUP
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.PUBLIC_DOMAIN],
+  }),
+);
 
 //mongoose connection
 mongoose

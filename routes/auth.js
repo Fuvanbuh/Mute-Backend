@@ -22,7 +22,7 @@ router.get('/me', isLoggedIn(), (req, res, next) => {
 });
 //  POST    '/login'
 router.post('/login', isNotLoggedIn(), validationLoggin(), async (req, res, next) => {
-  const { username, password, mail } = req.body;
+  const { password, mail } = req.body;
   try {
     const user = await User.findOne({ mail });
     if (!user) {
@@ -54,9 +54,8 @@ router.post(
     try {
       const mailExists = await User.findOne({ mail }, "mail");
 
-      if (mailExists) return next(createError(400));
+      if (mailExists) return next(createError(422, "Email in use"));
       else {
-
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashPass = bcrypt.hashSync(password, salt);
         const stories = await Story.find({ default: true });
