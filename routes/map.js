@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { isLoggedIn } = require('../helpers/middlewares');
 
+//ES PARA INTENTAR EL DEEP POPULATE PARA CONSEGUIR EL TEMA POPULADO
+// const deepPopulate = require('mongoose-deep-populate')(mongoose);
+// PostSchema.plugin(deepPopulate, options /* more on options below */);
+
 const Map = require("../models/Map");
 const Story = require('../models/Story');
 
@@ -11,11 +15,12 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
     const userId = req.session.currentUser._id;
     console.log(userId);
     const listMaps = await Map.find({ userId: userId }).populate('story');
-    res.status(200).json({ listMaps });
+    res.status(200).json(listMaps);
   } catch (error) {
     next(error);
   }
 });
+
 
 //get one map
 router.get('/:idMap', isLoggedIn(), async (req, res, next) => {
@@ -37,7 +42,7 @@ router.put('/:idMap/edit', isLoggedIn(), async (req, res, next) => {
       idMap,
       { $inc: { completePath: 1 } },
       { new: true }
-      );
+    );
 
     res.status(200).json(answered);
   } catch (error) {

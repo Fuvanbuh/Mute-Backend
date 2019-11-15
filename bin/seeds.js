@@ -4,7 +4,7 @@ const Theme = require('../models/Theme');
 
 
 mongoose.connect('mongodb://localhost/project-mute', { useNewUrlParser: true, useUnifiedTopology: true });
-//Story.collection.drop();
+Story.collection.drop();
 Theme.collection.drop();
 
 const seeds = async () => {
