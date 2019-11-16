@@ -10,8 +10,10 @@ const MongoStore = require("connect-mongo")(session);
 
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const auth = require('./routes/auth');
+//const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const mapRouter = require ('./routes/map')
+const storyRouter = require('./routes/story')
 
 //express server instance
 const app = express();
@@ -52,9 +54,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Router middleware
-app.use('/auth', auth)
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
+app.use('/auth', authRouter)
+app.use('/map', mapRouter);
+app.use('/story', storyRouter);
 
 //errors handling
 // catch 404 and forward to error handler
