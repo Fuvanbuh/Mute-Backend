@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
+  mail:{type:String , unique:true},
   travelMap: []
 }, {
   timestamps: {

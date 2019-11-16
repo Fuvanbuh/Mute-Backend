@@ -22,9 +22,9 @@ router.get('/me', isLoggedIn(), (req, res, next) => {
 });
 //  POST    '/login'
 router.post('/login', isNotLoggedIn(), validationLoggin(), async (req, res, next) => {
-  const { username, password } = req.body;
+  const { password, mail } = req.body;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ mail });
     if (!user) {
       next(createError(404));
     }
@@ -50,13 +50,12 @@ router.post(
   isNotLoggedIn(),
   validationLoggin(),
   async (req, res, next) => {
-    const { username, password } = req.body;
+    const { username, password, mail } = req.body;
     try {
-      const usernameExists = await User.findOne({ username }, "username");
+      const mailExists = await User.findOne({ mail }, "mail");
 
-      if (usernameExists) return next(createError(400));
+      if (mailExists) return next(createError(422, "Email in use"));
       else {
-
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashPass = bcrypt.hashSync(password, salt);
         const stories = await Story.find({ default: true });
@@ -75,7 +74,7 @@ router.post(
         }
 
         //crear user con el array de maps
-        const newUser = await User.create({ username, password: hashPass, travelMap: maps });
+        const newUser = await User.create({ username, password: hashPass,mail, travelMap: maps });
         console.log("maps fuera: ", maps)
         console.log(newUser)
 

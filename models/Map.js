@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const mapSchema = new Schema({
   completePath: { type: Number, default: 1 },
-  story: [{ type: Schema.Types.ObjectId, ref: "Story" }],
+  story: { type: Schema.Types.ObjectId, ref: "Story" },
   userId: String
 }, {
   timestamps: {

@@ -5,7 +5,7 @@ const { isLoggedIn } = require('../helpers/middlewares');
 const Map = require("../models/Map");
 const Story = require('../models/Story');
 
-//get stories
+//get all stories. Només ho utilitzarem quan fem buscador de totes les histories del mon
 router.get('/', isLoggedIn(), async (req, res, next) => {
   try {
     const stories = await Story.find();
@@ -14,6 +14,15 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/themes', isLoggedIn(), async (req, res, next) => {
+  try {
+    const themes = await themes.find();
+    res.status(200).json(themes)
+  } catch (errors) {
+    next(error);
+  }
+})
 
 
 // Create new Story
