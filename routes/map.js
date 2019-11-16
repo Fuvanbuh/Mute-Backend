@@ -8,18 +8,23 @@ const { isLoggedIn } = require('../helpers/middlewares');
 
 const Map = require("../models/Map");
 const Story = require('../models/Story');
+const Theme = require('../models/Theme')
 
 // get all maps
 router.get('/', isLoggedIn(), async (req, res, next) => {
   try {
     const userId = req.session.currentUser._id;
-    console.log(userId);
-    const listMaps = await Map.find({ userId: userId }).populate('story');
+    const listMaps = await Map.find({ userId: userId }).populate({
+      path: 'story',      
+      populate: { path: 'theme' }
+    });
+    console.log(listMaps)
     res.status(200).json(listMaps);
   } catch (error) {
     next(error);
   }
 });
+
 
 
 //get one map
@@ -32,6 +37,10 @@ router.get('/:idMap', isLoggedIn(), async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+
 
 //edit map
 router.put('/:idMap/edit', isLoggedIn(), async (req, res, next) => {
@@ -50,10 +59,14 @@ router.put('/:idMap/edit', isLoggedIn(), async (req, res, next) => {
   }
 });
 
+
 //delete one map
 
 router.delete('/:idMap/delete', isLoggedIn(), async (req, res, next) => {
   const { idMap } = req.params;
+  if (!idMap){
+    res.status(404).json({message: 'id not found'})
+  }
   try {
     await Map.findByIdAndDelete(idMap);
     res.status(200).json({ message: 'map deleted' });

@@ -10,8 +10,8 @@ Theme.collection.drop();
 const seeds = async () => {
   const themes = 
     {
-      checkpoint: ["./public/images/planeta-01.png", "./public/images/planeta-05.png", "./public/images/planeta-04.png", "./public/images/planeta-03.png", "./public/images/planeta-02.png", "./public/images/wireframes-09.png"],
-      background: "./public/images/wireframes-10.png",
+      checkpoint: ["planeta-01.png", "planeta-05.png", "planeta-04.png", "planeta-03.png", "planeta-02.png", "wireframes-09.png"],
+      background: "wireframes-10.png",
       price: String
     }
   
