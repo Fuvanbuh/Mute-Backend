@@ -8,18 +8,14 @@ Story.collection.drop();
 Theme.collection.drop();
 
 const seeds = async () => {
-  const themes = [
+  const themes = 
     {
       checkpoint: ["planeta-01.png", "planeta-05.png", "planeta-04.png", "planeta-03.png", "planeta-02.png", "wireframes-09.png"],
       background: "wireframes-10.png",
       price: String
-    },
-    {
-      checkpoint: ["animal-1.png", "animal-2.png", "animal-3.png", "animal-4.png", "animal-5.png", "wireframes-09.png"],
-      background: "sea-background.png",
-      price: String
-    },
-  ]
+    }
+   
+  
   
 
   const newThemes = await Theme.create(themes)
