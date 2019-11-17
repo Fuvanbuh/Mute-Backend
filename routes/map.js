@@ -2,9 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { isLoggedIn } = require('../helpers/middlewares');
 
-//ES PARA INTENTAR EL DEEP POPULATE PARA CONSEGUIR EL TEMA POPULADO
-// const deepPopulate = require('mongoose-deep-populate')(mongoose);
-// PostSchema.plugin(deepPopulate, options /* more on options below */);
 
 const Map = require("../models/Map");
 const Story = require('../models/Story');
@@ -31,8 +28,11 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
 router.get('/:idMap', isLoggedIn(), async (req, res, next) => {
   try {
     const { idMap } = req.params;
-    const oneMap = await Map.findById(idMap).populate('story');
-    res.status(200).json({ oneMap });
+    const oneMap = await Map.findById(idMap).populate({
+      path: 'story',
+      populate: { path: 'theme' }
+    });
+    res.status(200).json( oneMap );
   } catch (error) {
     next(error);
   }

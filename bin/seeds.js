@@ -8,12 +8,18 @@ Story.collection.drop();
 Theme.collection.drop();
 
 const seeds = async () => {
-  const themes = 
+  const themes = [
     {
       checkpoint: ["planeta-01.png", "planeta-05.png", "planeta-04.png", "planeta-03.png", "planeta-02.png", "wireframes-09.png"],
       background: "wireframes-10.png",
       price: String
-    }
+    },
+    {
+      checkpoint: ["animal-1.png", "animal-2.png", "animal-3.png", "animal-4.png", "animal-5.png", "wireframes-09.png"],
+      background: "sea-background.png",
+      price: String
+    },
+  ]
   
 
   const newThemes = await Theme.create(themes)
@@ -23,27 +29,86 @@ const seeds = async () => {
   const stories = [
     {
       title: "First story",
-      paragraph: ["primer parrafp", "segundo parrafo", "tercer parrafo", "cuarto parrafo", "quinto parrafo"],
-      questions: [{
+      paragraph: [{
+        text: "primer paragrafo", 
+        question: "primera pregunta?",
+        answer1: "Respuesta1",
+        answer2: "Respuesta2",
+        answer3: "Respuesta3",
+        correct: "answer2" },
+        {
+          text: "segundo paragrafo",
+          question: "segunda pregunta?",
+          answer1: "Respuesta1",
+          answer2: "Respuesta2",
+          answer3: "Respuesta3",
+          correct: "answer2"
+        }, {
+          text: "tercer paragrafo",
+          question: "tercera pregunta?",
+          answer1: "Respuesta1",
+          answer2: "Respuesta2",
+          answer3: "Respuesta3",
+          correct: "answer2"
+        }, {
+          text: "cuarto paragrafo",
+          question: "cuarta pregunta?",
+          answer1: "Respuesta1",
+          answer2: "Respuesta2",
+          answer3: "Respuesta3",
+          correct: "answer2"
+        }, {
+          text: "qquinto paragrafo",
+          question: "quinta pregunta?",
+          answer1: "Respuesta1",
+          answer2: "Respuesta2",
+          answer3: "Respuesta3",
+          correct: "answer2"
+        }],
+     
+      theme: newThemes._id,
+      default: true,
+    },
+    {
+      title: "second story",
+      paragraph: [{
+        text: "primer paragrafo",
         question: "primera pregunta?",
         answer1: "Respuesta1",
         answer2: "Respuesta2",
         answer3: "Respuesta3",
         correct: "answer2"
-      }],
-      theme: newThemes._id,
-      default: true,
-    },
-    {
-      title: "Second story",
-      paragraph: ["primer parrafp", "segundo parrafo", "tercer parrafo", "cuarto parrafo", "quinto parrafo"],
-      questions: [{
-        question: "primera pregunta?",
+      },
+      {
+        text: "segundo paragrafo",
+        question: "segunda pregunta?",
         answer1: "Respuesta1",
         answer2: "Respuesta2",
         answer3: "Respuesta3",
-        correct: "answer1"
+        correct: "answer2"
+      }, {
+        text: "tercer paragrafo",
+        question: "tercera pregunta?",
+        answer1: "Respuesta1",
+        answer2: "Respuesta2",
+        answer3: "Respuesta3",
+        correct: "answer2"
+      }, {
+        text: "cuarto paragrafo",
+        question: "cuarta pregunta?",
+        answer1: "Respuesta1",
+        answer2: "Respuesta2",
+        answer3: "Respuesta3",
+        correct: "answer2"
+      }, {
+        text: "qquinto paragrafo",
+        question: "quinta pregunta?",
+        answer1: "Respuesta1",
+        answer2: "Respuesta2",
+        answer3: "Respuesta3",
+        correct: "answer2"
       }],
+
       theme: newThemes._id,
       default: true,
     }
