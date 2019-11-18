@@ -4,6 +4,7 @@ const { isLoggedIn } = require('../helpers/middlewares');
 
 const Map = require("../models/Map");
 const Story = require('../models/Story');
+const Theme = require('../models/Theme');
 
 //get all stories. Només ho utilitzarem quan fem buscador de totes les histories del mon
 router.get('/', isLoggedIn(), async (req, res, next) => {
@@ -17,9 +18,9 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
 
 router.get('/themes', isLoggedIn(), async (req, res, next) => {
   try {
-    const themes = await themes.find();
+    const themes = await Theme.find();
     res.status(200).json(themes)
-  } catch (errors) {
+  } catch (error) {
     next(error);
   }
 })
@@ -29,7 +30,7 @@ router.get('/themes', isLoggedIn(), async (req, res, next) => {
 router.post('/addStory', isLoggedIn(), async (req, res, next) => {
   try {
     const userId = req.session.currentUser._id;
-    console.log(userId);
+  
     const newStory = req.body;
     newStory.creator = userId;
     const createdStory = await Story.create(newStory);
@@ -49,7 +50,7 @@ router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
       storyUpdated,
       { new: true }
     );
-  
+
     res.status(200).json(updated);
   } catch (error) {
     next(error);

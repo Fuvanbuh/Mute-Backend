@@ -58,8 +58,10 @@ router.post(
       else {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashPass = bcrypt.hashSync(password, salt);
-        const stories = await Story.find({ default: true });
+        const stories = await Story.find({ storyDefault: true });
         const maps = []
+       
+        
 
         //un mapa por cada story y push del newmap.id a un array
         // stories.map(async (story) => {
@@ -75,8 +77,7 @@ router.post(
 
         //crear user con el array de maps
         const newUser = await User.create({ username, password: hashPass,mail, travelMap: maps });
-        console.log("maps fuera: ", maps)
-        console.log(newUser)
+        
 
         // recorrer array de maps para buscar cada uno y añadirle id de newUserç
         for(let i=0; i<maps.length; i++){
