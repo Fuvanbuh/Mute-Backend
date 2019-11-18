@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const themeSchema = new Schema({
   checkpoint: [{ type: String}],
   background: String,
-  price: String
+  price: String,
+  title: String
 }, {
   timestamps: {
     createdAt: 'created_at',

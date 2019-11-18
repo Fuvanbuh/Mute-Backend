@@ -12,7 +12,7 @@ const storySchema = new Schema({
   }],
   theme: { type: Schema.Types.ObjectId, ref: "Theme" },
   creator: { type: Schema.Types.ObjectId, ref: "User" },
-  default: { type: Boolean, default: false }
+  storyDefault: { type: Boolean, default: false }
 }, {
   timestamps: {
     createdAt: 'created_at',

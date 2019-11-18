@@ -59,6 +59,19 @@ router.put('/:idMap/edit', isLoggedIn(), async (req, res, next) => {
   }
 });
 
+// Create new Map
+router.post('/addMap', isLoggedIn(), async (req, res, next) => {
+  try {
+    const userId = req.session.currentUser._id;
+    const newMap = req.body;
+    newMap.userId = userId;
+    const createdMap = await Map.create(newMap);
+    res.status(200).json(createdMap);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 //delete one map
 
