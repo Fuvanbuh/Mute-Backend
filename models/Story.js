@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const storySchema = new Schema({
   title: String,
-  paragraph: [ { text: String,
-    question: String, 
-    answer1:  String, 
-    answer2:  String, 
-    answer3:  String, 
-    correct: { type: String, enum: [ "answer1", "answer2", "answer3" ]}
-  } ],
+  paragraph: [{
+    text: String,
+    question: String,
+    answer1: String,
+    answer2: String,
+    answer3: String,
+    correct: { type: String, enum: ["answer1", "answer2", "answer3"] }
+  }],
   theme: { type: Schema.Types.ObjectId, ref: "Theme" },
   creator: { type: Schema.Types.ObjectId, ref: "User" },
   default: { type: Boolean, default: false }
@@ -19,7 +19,5 @@ const storySchema = new Schema({
     updatedAt: 'updated_at'
   },
 });
-
 const Story = mongoose.model('Story', storySchema);
-
 module.exports = Story;
