@@ -34,12 +34,12 @@ router.get('/:storyId', async (req, res, next) => {
   } = req.params;
   try {
     const story = await Story.findById(storyId);
+
     res.status(200).json(story);
   } catch (error) {
     next(error);
   }
 });
-
 
 
 
@@ -66,9 +66,7 @@ router.put('/:idStory/addParagraph', isLoggedIn(), async (req, res, next) => {
   try {
     const updated = await Story.findByIdAndUpdate(
       idStory,
-      storyUpdated, {
-        new: true
-      }
+      storyUpdated, { new: true }
     );
 
     res.status(200).json(updated);
