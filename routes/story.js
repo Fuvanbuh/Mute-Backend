@@ -18,6 +18,16 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
   }
 });
 
+router.get('/themes', isLoggedIn(), async (req, res, next) => {
+  try {
+    //console.log('themes')
+    const themes = await Theme.find();
+    res.status(200).json(themes)
+  } catch (error) {
+    next(error);
+  }
+})
+
 router.get('/:storyId', async (req, res, next) => {
   const {
     storyId
@@ -29,14 +39,8 @@ router.get('/:storyId', async (req, res, next) => {
     next(error);
   }
 });
-router.get('/themes', isLoggedIn(), async (req, res, next) => {
-  try {
-    const themes = await Theme.find();
-    res.status(200).json(themes)
-  } catch (error) {
-    next(error);
-  }
-})
+
+
 
 
 // Create new Story
@@ -53,8 +57,8 @@ router.post('/addStory', isLoggedIn(), async (req, res, next) => {
   }
 });
 
-//edit story
-router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
+//add story
+router.put('/:idStory/addParagraph', isLoggedIn(), async (req, res, next) => {
   const {
     idStory
   } = req.params;
@@ -68,6 +72,32 @@ router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
     );
 
     res.status(200).json(updated);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//edit paragraph
+router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
+  const {
+    idStory
+  } = req.params;
+  const {updatedParagraph} = req.body;
+  const {paragraphNumber} = req.body;
+  try {
+    const storyUpdated = await Story.findById(idStory)
+    const newParagraphs = [...storyUpdated.paragraph]
+    newParagraphs.splice(paragraphNumber,1,updatedParagraph)
+    storyUpdated.paragraph = newParagraphs
+    const story = await Story.findByIdAndUpdate(
+      idStory,
+      storyUpdated, {
+        new: true
+      }
+    );
+    console.log(story)
+
+    res.status(200).json({});
   } catch (error) {
     next(error);
   }
