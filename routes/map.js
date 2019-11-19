@@ -15,7 +15,7 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
       path: 'story',      
       populate: { path: 'theme' }
     });
-    console.log(listMaps)
+    //console.log(listMaps)
     res.status(200).json(listMaps);
   } catch (error) {
     next(error);

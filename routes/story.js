@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { isLoggedIn } = require('../helpers/middlewares');
+const {
+  isLoggedIn
+} = require('../helpers/middlewares');
 
 const Map = require("../models/Map");
 const Story = require('../models/Story');
@@ -18,6 +20,7 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
 
 router.get('/themes', isLoggedIn(), async (req, res, next) => {
   try {
+    //console.log('themes')
     const themes = await Theme.find();
     res.status(200).json(themes)
   } catch (error) {
@@ -25,12 +28,26 @@ router.get('/themes', isLoggedIn(), async (req, res, next) => {
   }
 })
 
+router.get('/:storyId', async (req, res, next) => {
+  const {
+    storyId
+  } = req.params;
+  try {
+    const story = await Story.findById(storyId);
+
+    res.status(200).json(story);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 // Create new Story
 router.post('/addStory', isLoggedIn(), async (req, res, next) => {
   try {
     const userId = req.session.currentUser._id;
-  
+
     const newStory = req.body;
     newStory.creator = userId;
     const createdStory = await Story.create(newStory);
@@ -40,18 +57,45 @@ router.post('/addStory', isLoggedIn(), async (req, res, next) => {
   }
 });
 
-//edit story
-router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
-  const { idStory } = req.params;
+//add story
+router.put('/:idStory/addParagraph', isLoggedIn(), async (req, res, next) => {
+  const {
+    idStory
+  } = req.params;
   const storyUpdated = req.body;
   try {
     const updated = await Story.findByIdAndUpdate(
       idStory,
-      storyUpdated,
-      { new: true }
+      storyUpdated, { new: true }
     );
 
     res.status(200).json(updated);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//edit paragraph
+router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
+  const {
+    idStory
+  } = req.params;
+  const {updatedParagraph} = req.body;
+  const {paragraphNumber} = req.body;
+  try {
+    const storyUpdated = await Story.findById(idStory)
+    const newParagraphs = [...storyUpdated.paragraph]
+    newParagraphs.splice(paragraphNumber,1,updatedParagraph)
+    storyUpdated.paragraph = newParagraphs
+    const story = await Story.findByIdAndUpdate(
+      idStory,
+      storyUpdated, {
+        new: true
+      }
+    );
+    console.log(story)
+
+    res.status(200).json({});
   } catch (error) {
     next(error);
   }
