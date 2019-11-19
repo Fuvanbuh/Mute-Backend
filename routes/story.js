@@ -18,17 +18,6 @@ router.get('/', isLoggedIn(), async (req, res, next) => {
   }
 });
 
-router.get('/:storyId', async (req, res, next) => {
-  const {
-    storyId
-  } = req.params;
-  try {
-    const story = await Story.findById(storyId);
-    res.status(200).json(story);
-  } catch (error) {
-    next(error);
-  }
-});
 router.get('/themes', isLoggedIn(), async (req, res, next) => {
   try {
     const themes = await Theme.find();
@@ -37,6 +26,20 @@ router.get('/themes', isLoggedIn(), async (req, res, next) => {
     next(error);
   }
 })
+
+router.get('/:storyId', async (req, res, next) => {
+  const {
+    storyId
+  } = req.params;
+  try {
+    const story = await Story.findById(storyId);
+
+    res.status(200).json(story);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 
 // Create new Story
@@ -53,7 +56,7 @@ router.post('/addStory', isLoggedIn(), async (req, res, next) => {
   }
 });
 
-//edit story
+// edit story
 router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
   const {
     idStory
@@ -62,9 +65,7 @@ router.put('/:idStory/edit', isLoggedIn(), async (req, res, next) => {
   try {
     const updated = await Story.findByIdAndUpdate(
       idStory,
-      storyUpdated, {
-        new: true
-      }
+      storyUpdated, { new: true }
     );
 
     res.status(200).json(updated);

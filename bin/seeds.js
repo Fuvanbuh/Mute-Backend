@@ -13,12 +13,12 @@ const seeds = async () => {
     checkpoint: ["planeta-01.png", "planeta-05.png", "planeta-04.png", "planeta-03.png", "planeta-02.png"],
     background: "wireframes-10.png",
     price: String,
+    title: 'Espacio'
+  }, {
+    checkpoint: ["animal-1.png", "animal-2.png", "animal-3.png", "animal-4.png", "animal-5.png"],
+    background: "sea-background.png",
+    price: String,
     title: 'Oceano'
-    }, {
-      checkpoint: ["animal-1.png", "animal-2.png", "animal-3.png", "animal-4.png", "animal-5.png"],
-      background: "sea-background.png",
-      price: String,
-      title: 'Espacio'
     }
   ]
 
